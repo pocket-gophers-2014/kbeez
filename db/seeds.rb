@@ -1,7 +1,10 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+ActiveRecord::Base.connection.execute("TRUNCATE bakery_counters, coffee_bars, foods;")
+
+bc = BakeryCounter.create name: "Gramma Kbeezy's Windowsill"
+cb = CoffeeBar.create name: "Kbuzzin'"
+
+dranks = %w-Expresso PurpleDrank-
+starchys = %w-CherryPie ChocolateCake MethyOhs-
+
+bc.foods.create starchys.map{|s| { name: s } }
+cb.foods.create dranks.map{|s| { name: s } }
